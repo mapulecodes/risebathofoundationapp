@@ -9,46 +9,44 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Vue.js CDN - Moved to head and added defer -->
+    <!-- Vue.js CDN: Loaded with defer in head. Ensures Vue is ready before our script runs. -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js" defer></script>
-    <!-- Supabase UMD CDN - Moved to head and added defer -->
-    <script src="https://unpkg.com/@supabase/supabase-js@latest/dist/umd/supabase.min.js" defer></script>
-
+    
     <style>
-      
+        /* Base Styles - for Inter font */
         body {
             font-family: 'Inter', sans-serif;
-            margin: 0; 
+            margin: 0; /* Ensures no default body margin */
         }
-        /* created custom styles for box- remember to underline boxes to match logo */
+        /* Custom styles for checkboxes for better appearance */
         input[type="checkbox"] {
             -webkit-appearance: none;
             -moz-appearance: none;
             appearance: none;
             display: inline-block;
-            width: 1.25rem; 
-            height: 1.25rem; 
-            border: 2px solid #D1D5DB; 
-            border-radius: 0.25rem; 
+            width: 1.25rem; /* 20px */
+            height: 1.25rem; /* 20px */
+            border: 2px solid #D1D5DB; /* light gray border */
+            border-radius: 0.25rem; /* rounded corners */
             vertical-align: middle;
             position: relative;
             cursor: pointer;
-            flex-shrink: 0; 
+            flex-shrink: 0; /* Prevents shrinking in flex containers */
         }
 
         input[type="checkbox"]:checked {
-            background-color: #2563EB; /* blue- matches logo i created */
+            background-color: #2563EB; /* blue-600 */
             border-color: #2563EB;
         }
 
         input[type="checkbox"]:checked::after {
-            content: '\2713';
+            content: '\2713'; /* Checkmark character */
             display: block;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 0.8rem; 
+            font-size: 0.8rem; /* Smaller checkmark */
             color: white;
         }
 
@@ -92,7 +90,7 @@
     <div id="app" class="min-h-screen bg-gray-100 p-4 font-sans leading-relaxed text-gray-800">
         <!-- Hero Section -->
         <section class="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-8 rounded-lg shadow-xl mb-10 text-center relative overflow-hidden">
-            <!-- Logo - Updated with my logo GitHub image URL- used raw image link -->
+            <!-- Logo - Updated with your GitHub image URL -->
             <img src="https://raw.githubusercontent.com/mapulecodes/fridayimages/refs/heads/main/images/rise%20batho%20logo.png" alt="Rise Batho Foundation Logo" class="mx-auto mb-4 h-32 w-auto object-contain rounded-full border-4 border-white shadow-lg">
 
             <h1 class="text-5xl font-extrabold mb-3 drop-shadow-md">Rise Batho Foundation</h1>
@@ -124,7 +122,7 @@
         <section class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg mb-10">
             <h2 class="text-3xl font-semibold mb-6 text-center text-blue-700">About Us</h2>
             <p class="text-lg text-gray-700 leading-relaxed text-center">
-            We passionately support youth and students as they navigate the challenges of education, unemployment, 
+              We passionately support youth and students as they navigate the challenges of education, unemployment, 
             and personal growth—empowering them with the tools, resources, and mentorship they need to thrive and lead meaningful lives.
             </p>
         </section>
@@ -437,10 +435,12 @@
                         risebathofoundation@gmail.com
                     </a>
                 </p>
-                <!-- Social Media Links-->
+                <!-- Optional Social Media Links - Add icons/links here -->
                 <p class="text-gray-700">
                     <strong class="text-blue-600">Follow Us:</strong>
                     <a href="#" target="_blank" class="text-gray-700 hover:text-blue-500 ml-2"><i class="fab fa-facebook"></i></a>
+                    
+                
                 </p>
             </div>
              <!-- Font Awesome for social media icons -->
@@ -454,23 +454,20 @@
     </div>
 
     <script>
-        // Ensure the DOM is fully loaded before initializing the Vue app and Supabase client
+        // Ensure the DOM is fully loaded before trying to mount Vue app
         window.addEventListener('DOMContentLoaded', function() {
-            // Supabase Configuration - REPLACED WITH YOUR ACTUAL PROJECT URL
-            const SUPABASE_URL = 'https://isphtemmbvapetitaysv.supabase.co';
-            const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlzcGh0ZW1tYnZhcGV0aXRheXN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA5MjYwMzYsImV4cCI6MjA2NjUwMjAzNn0.p6_Zor2ycKEmsRMzRbwMnZWQIBUqX7BxlMWwIHkEWfY'; 
+            // Define your backend API URL
+            // During local development, this will be http://localhost:3000
+            // After deploying your backend, replace this with your deployed backend URL (e.g., https://your-backend-app.onrender.com)
+            const BACKEND_API_URL = 'http://localhost:3000'; 
 
-            // Check if Supabase client is available globally
-            if (typeof window.supabase === 'undefined') {
-                console.error("Supabase client library not loaded. Check the CDN script tag in the <head>.");
-                // Optionally display a user-friendly message or disable form
-                document.getElementById('app').innerHTML = '<p class="text-red-600 text-center font-bold">Error: Application could not load. Please try again later. Ensure your internet connection is stable.</p>';
-                return; // Stop execution if Supabase is not available
+            // Check if Vue.js is defined globally (it should be due to defer attribute)
+            if (typeof Vue === 'undefined') {
+                console.error("Vue.js library not loaded. Please check the CDN script tag in the <head> and your internet connection.");
+                document.getElementById('app').innerHTML = '<p class="text-red-600 text-center font-bold">Error: Application could not load. Please check your internet connection and try again.</p>';
+                return;
             }
-
-            // Create Supabase client instance using the globally available Supabase object
-            const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
+            
             const app = Vue.createApp({
                 data() {
                     return {
@@ -488,7 +485,7 @@
                             suburb: '',
                             city: '',
                             province: '',
-                            postal_code: '', // Kept as string for pattern validation input
+                            postal_code: '', 
                             education_level: '',
                             in_school: null,
                             employed: null,
@@ -526,9 +523,8 @@
                             return;
                         }
 
-                        // Prepare data for Supabase insertion
-                        // Ensure postal_code is converted to an integer if the DB column is int4
-                        const dataToInsert = {
+                        // Prepare data for backend
+                        const dataToSubmit = {
                             first_name: this.formData.first_name,
                             middle_names: this.formData.middle_names,
                             last_name: this.formData.last_name,
@@ -542,14 +538,14 @@
                             suburb: this.formData.suburb,
                             city: this.formData.city,
                             province: this.formData.province,
-                            postal_code: parseInt(this.formData.postal_code, 10), // Convert to integer for DB
+                            postal_code: this.formData.postal_code, 
                             education_level: this.formData.education_level,
                             in_school: this.formData.in_school,
                             employed: this.formData.employed,
                             looking_for_work: this.formData.looking_for_work,
                             qualifications_certificates: this.formData.qualifications_certificates,
                             skills: this.formData.skills,
-                            help_needed: this.formData.help_needed.join(', '), // Convert array to comma-separated string for DB
+                            help_needed: this.formData.help_needed.join(', '), // Convert array to comma-separated string
                             goals_and_challenges: this.formData.goals_and_challenges,
                             how_heard: this.formData.how_heard,
                             accept_popia_policy: this.formData.accept_popia_policy,
@@ -557,18 +553,36 @@
                         };
 
                         try {
-                            const { data, error } = await supabase
-                                .from('youth_profiles')
-                                .insert([dataToInsert]);
+                            const response = await fetch(`${BACKEND_API_URL}/submit-profile`, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify(dataToSubmit),
+                            });
 
-                            if (error) {
-                                throw error;
+                            if (!response.ok) {
+                                // If response is not OK (e.g., 4xx, 5xx status codes)
+                                let errorMessage = `HTTP error! Status: ${response.status}`;
+                                try {
+                                    const errorData = await response.json();
+                                    if (errorData.message) {
+                                        errorMessage = errorData.message;
+                                    } else {
+                                        errorMessage = JSON.stringify(errorData);
+                                    }
+                                } catch (parseError) {
+                                    // If response is not valid JSON
+                                    errorMessage = await response.text();
+                                }
+                                throw new Error(errorMessage);
                             }
 
+                            const result = await response.json();
                             this.message = 'Your profile has been submitted successfully! Thank you.';
                             this.messageType = 'success';
                             this.resetForm(); // Clear the form after successful submission
-                            console.log('Submission successful:', data);
+                            console.log('Submission successful:', result);
                         } catch (error) {
                             this.message = `Error submitting profile: ${error.message}`;
                             this.messageType = 'error';
