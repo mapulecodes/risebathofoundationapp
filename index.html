@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rise Batho Foundation - Youth Management NPO</title>
+    <!-- Inter Font - CDN -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Vue.js CDN - Moved to head and added defer -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js" defer></script>
+    <!-- Supabase UMD CDN - Moved to head and added defer -->
+    <script src="https://unpkg.com/@supabase/supabase-js@latest/dist/umd/supabase.min.js" defer></script>
+
+    <style>
+      
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0; 
+        }
+        /* created custom styles for box- remember to underline boxes to match logo */
+        input[type="checkbox"] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            display: inline-block;
+            width: 1.25rem; 
+            height: 1.25rem; 
+            border: 2px solid #D1D5DB; 
+            border-radius: 0.25rem; 
+            vertical-align: middle;
+            position: relative;
+            cursor: pointer;
+            flex-shrink: 0; 
+        }
+
+        input[type="checkbox"]:checked {
+            background-color: #2563EB; /* blue- matches logo i created */
+            border-color: #2563EB;
+        }
+
+        input[type="checkbox"]:checked::after {
+            content: '\2713';
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 0.8rem; 
+            color: white;
+        }
+
+        /* Custom styles for radio buttons */
+        input[type="radio"] {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            display: inline-block;
+            width: 1.25rem; /* 20px */
+            height: 1.25rem; /* 20px */
+            border: 2px solid #D1D5DB; /* light gray border */
+            border-radius: 50%; /* round shape */
+            vertical-align: middle;
+            position: relative;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        input[type="radio"]:checked {
+            background-color: #2563EB; /* blue-600 */
+            border-color: #2563EB;
+        }
+
+        input[type="radio"]:checked::after {
+            content: '';
+            display: block;
+            width: 0.625rem; /* 10px */
+            height: 0.625rem; /* 10px */
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app" class="min-h-screen bg-gray-100 p-4 font-sans leading-relaxed text-gray-800">
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-r from-blue-600 to-blue-800 text-white p-8 rounded-lg shadow-xl mb-10 text-center relative overflow-hidden">
+            <!-- Logo - Updated with my logo GitHub image URL- used raw image link -->
+            <img src="https://raw.githubusercontent.com/mapulecodes/fridayimages/refs/heads/main/images/rise%20batho%20logo.png" alt="Rise Batho Foundation Logo" class="mx-auto mb-4 h-32 w-auto object-contain rounded-full border-4 border-white shadow-lg">
+
+            <h1 class="text-5xl font-extrabold mb-3 drop-shadow-md">Rise Batho Foundation</h1>
+            <p class="text-xl italic mb-8 opacity-90">"Empowering the future through opportunity and mentorship."</p>
+            <a href="#youth-registration-form-section" class="inline-block bg-white text-blue-700 hover:bg-blue-100 font-bold py-3 px-8 rounded-full shadow-lg transform transition duration-300 ease-in-out hover:scale-105 text-lg">
+                Register as a Youth
+            </a>
+            <!-- Added prominent Contact Info at the top -->
+            <div class="mt-8 pt-4 border-t border-blue-400/50">
+                <p class="text-lg font-semibold mb-2">Get in Touch Directly:</p>
+                <p class="flex items-center justify-center mb-2">
+                    <strong class="mr-2">Email:</strong>
+                    <a href="mailto:risebathofoundation@gmail.com" class="text-blue-100 hover:underline">risebathofoundation@gmail.com</a>
+                </p>
+                <p class="flex items-center justify-center mb-2">
+                    <strong class="mr-2">WhatsApp:</strong>
+                    <a href="https://wa.me/27728270431" target="_blank" class="text-blue-100 hover:underline">
+                        +27 72 827 0431
+                    </a>
+                </p>
+                <p class="flex items-center justify-center">
+                    <strong class="mr-2">Address:</strong>
+                    <span class="text-blue-100">Parow, Cape Town, 7500, South Africa</span>
+                </p>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg mb-10">
+            <h2 class="text-3xl font-semibold mb-6 text-center text-blue-700">About Us</h2>
+            <p class="text-lg text-gray-700 leading-relaxed text-center">
+            We passionately support youth and students as they navigate the challenges of education, unemployment, 
+            and personal growth—empowering them with the tools, resources, and mentorship they need to thrive and lead meaningful lives.
+            </p>
+        </section>
+
+        <!-- Why Register Section -->
+        <section class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg mb-10">
+            <h2 class="text-3xl font-semibold mb-6 text-center text-blue-700">Why Register With Us?</h2>
+            <ul class="list-disc list-inside text-lg text-gray-700 space-y-3 px-4 md:px-10">
+                <li><strong class="text-blue-600">Opportunity Access:</strong> Get help with finding work or school opportunities tailored to your aspirations.</li>
+                <li><strong class="text-blue-600">Supportive Community:</strong> Join a network of peers and mentors who are invested in your success.</li>
+                <li><strong class="text-blue-600">Exclusive Resources:</strong> Be among the first to hear about workshops, training, bursaries, or valuable resources.</li>
+                <li><strong class="text-blue-600">Personalized Guidance:</strong> Receive mentorship and life coaching to navigate challenges and achieve your goals.</li>
+            </ul>
+        </section>
+
+        <!-- Youth Registration Form Section -->
+        <main id="youth-registration-form-section" class="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-lg mb-10">
+            <h2 class="text-3xl font-semibold mb-6 text-center text-blue-700">Tell us about you — we’re here to help!</h2>
+            <p class="text-center text-gray-600 mb-8">
+                Please complete the form below so we can understand your unique situation and provide the most relevant support.
+            </p>
+
+            <form @submit.prevent="submitForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                <!-- Section 1: Personal Information -->
+                <div class="col-span-full">
+                    <h3 class="text-xl font-medium text-blue-600 mb-4 border-b pb-2">1. Personal Information</h3>
+                </div>
+                <div>
+                    <label for="firstName" class="block text-gray-700 text-sm font-bold mb-2">First Name: <span class="text-red-500">*</span></label>
+                    <input type="text" id="firstName" v-model="formData.first_name" required
+                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="middleNames" class="block text-gray-700 text-sm font-bold mb-2">Middle Name(s) (if any):</label>
+                    <input type="text" id="middleNames" v-model="formData.middle_names"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="lastName" class="block text-gray-700 text-sm font-bold mb-2">Surname: <span class="text-red-500">*</span></label>
+                    <input type="text" id="lastName" v-model="formData.last_name" required
+                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="dob" class="block text-gray-700 text-sm font-bold mb-2">Date of Birth: <span class="text-red-500">*</span></label>
+                    <input type="date" id="dob" v-model="formData.date_of_birth" required
+                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="gender" class="block text-gray-700 text-sm font-bold mb-2">Gender: <span class="text-red-500">*</span></label>
+                    <select id="gender" v-model="formData.gender" required
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                        <option value="Prefer not to say">Prefer not to say</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="race" class="block text-gray-700 text-sm font-bold mb-2">Race (Optional):</label>
+                    <select id="race" v-model="formData.race"
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Select Race</option>
+                        <option value="African">African</option>
+                        <option value="Coloured">Coloured</option>
+                        <option value="Indian">Indian</option>
+                        <option value="White">White</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="col-span-full">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Do you have a disability? (Optional):</label>
+                    <div class="flex items-center space-x-4">
+                        <label class="inline-flex items-center">
+                            <input type="radio" v-model="formData.has_disability" :value="true" class="form-radio text-blue-600 h-4 w-4">
+                            <span class="ml-2 text-gray-700">Yes</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" v-model="formData.has_disability" :value="false" class="form-radio text-blue-600 h-4 w-4">
+                            <span class="ml-2 text-gray-700">No</span>
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <label for="mobileNumber" class="block text-gray-700 text-sm font-bold mb-2">Mobile Number: <span class="text-red-500">*</span></label>
+                    <input type="tel" id="mobileNumber" v-model="formData.phone_number" required placeholder="e.g., 27721234567" pattern="^27[0-9]{9}$"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <p class="text-xs text-gray-500 mt-1">Use SA format: 27xxxxxxxxx</p>
+                </div>
+                <div>
+                    <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email Address (Optional):</label>
+                    <input type="email" id="email" v-model="formData.email"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <!-- Section 2: Address & Location -->
+                <div class="col-span-full">
+                    <h3 class="text-xl font-medium text-blue-600 mb-4 border-b pb-2 mt-6">2. Address & Location</h3>
+                </div>
+                <div class="col-span-full">
+                    <label for="streetAddress" class="block text-gray-700 text-sm font-bold mb-2">Street Address: <span class="text-red-500">*</span></label>
+                    <input type="text" id="streetAddress" v-model="formData.street_address" required
+                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="suburb" class="block text-gray-700 text-sm font-bold mb-2">Suburb: <span class="text-red-500">*</span></label>
+                    <input type="text" id="suburb" v-model="formData.suburb" required
+                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="cityTown" class="block text-gray-700 text-sm font-bold mb-2">City/Town: <span class="text-red-500">*</span></label>
+                    <input type="text" id="cityTown" v-model="formData.city" required
+                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div>
+                    <label for="province" class="block text-gray-700 text-sm font-bold mb-2">Province: <span class="text-red-500">*</span></label>
+                    <select id="province" v-model="formData.province" required
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Select Province</option>
+                        <option value="Eastern Cape">Eastern Cape</option>
+                        <option value="Free State">Free State</option>
+                        <option value="Gauteng">Gauteng</option>
+                        <option value="KwaZulu-Natal">KwaZulu-Natal</option>
+                        <option value="Limpopo">Limpopo</option>
+                        <option value="Mpumalanga">Mpumalanga</option>
+                        <option value="North West">North West</option>
+                        <option value="Northern Cape">Northern Cape</option>
+                        <option value="Western Cape">Western Cape</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="postalCode" class="block text-gray-700 text-sm font-bold mb-2">Postal Code: <span class="text-red-500">*</span></label>
+                    <input type="text" id="postalCode" v-model="formData.postal_code" required pattern="[0-9]{4}"
+                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
+                           <p class="text-xs text-gray-500 mt-1">4 digit postal code</p>
+                </div>
+
+                <!-- Section 3: Education & Employment -->
+                <div class="col-span-full">
+                    <h3 class="text-xl font-medium text-blue-600 mb-4 border-b pb-2 mt-6">3. Education & Employment</h3>
+                </div>
+                <div class="col-span-full">
+                    <label for="educationLevel" class="block text-gray-700 text-sm font-bold mb-2">
+                        Education Level Completed: <span class="text-red-500">*</span>
+                    </label>
+                    <select id="educationLevel" v-model="formData.education_level" required
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Select Education Level</option>
+                        <option value="No Formal Education">No Formal Education</option>
+                        <option value="Primary School">Primary School</option>
+                        <option value="Some High School">Some High School</option>
+                        <option value="Matric/High School Diploma">Matric/High School Diploma</option>
+                        <option value="Vocational Training/Certificate">Vocational Training/Certificate</option>
+                        <option value="Some Tertiary Education">Some Tertiary Education</option>
+                        <option value="Diploma/Degree">Diploma/Degree</option>
+                        <option value="Post-graduate">Post-graduate</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="col-span-full">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Are you currently in school?: <span class="text-red-500">*</span></label>
+                    <div class="flex items-center space-x-4">
+                        <label class="inline-flex items-center">
+                            <input type="radio" v-model="formData.in_school" :value="true" required class="form-radio text-blue-600 h-4 w-4">
+                            <span class="ml-2 text-gray-700">Yes</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" v-model="formData.in_school" :value="false" required class="form-radio text-blue-600 h-4 w-4">
+                            <span class="ml-2 text-gray-700">No</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-span-full">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Are you currently employed?: <span class="text-red-500">*</span></label>
+                    <div class="flex items-center space-x-4">
+                        <label class="inline-flex items-center">
+                            <input type="radio" v-model="formData.employed" :value="true" required class="form-radio text-blue-600 h-4 w-4">
+                            <span class="ml-2 text-gray-700">Yes</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" v-model="formData.employed" :value="false" required class="form-radio text-blue-600 h-4 w-4">
+                            <span class="ml-2 text-gray-700">No</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-span-full" v-if="formData.employed === false">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Are you actively looking for work?: <span class="text-red-500">*</span></label>
+                    <div class="flex items-center space-x-4">
+                        <label class="inline-flex items-center">
+                            <input type="radio" v-model="formData.looking_for_work" :value="true" required class="form-radio text-blue-600 h-4 w-4">
+                            <span class="ml-2 text-gray-700">Yes</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="radio" v-model="formData.looking_for_work" :value="false" required class="form-radio text-blue-600 h-4 w-4">
+                            <span class="ml-2 text-gray-700">No</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-span-full">
+                    <label for="qualifications" class="block text-gray-700 text-sm font-bold mb-2">Qualifications/Certificates (if any):</label>
+                    <textarea id="qualifications" v-model="formData.qualifications_certificates" rows="3"
+                              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                </div>
+
+
+                <!-- Section 4: Skills & Support Needs -->
+                <div class="col-span-full">
+                    <h3 class="text-xl font-medium text-blue-600 mb-4 border-b pb-2 mt-6">4. Skills & Support Needs</h3>
+                </div>
+                <div class="col-span-full">
+                    <label for="skills" class="block text-gray-700 text-sm font-bold mb-2">
+                        What are your top skills/interests? <span class="text-red-500">*</span>
+                    </label>
+                    <textarea id="skills" v-model="formData.skills" rows="3" required
+                              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                </div>
+                <div class="col-span-full">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">What kind of help do you need?: <span class="text-red-500">*</span></label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" v-model="formData.help_needed" value="Work Opportunities" class="form-checkbox">
+                            <span class="ml-2 text-gray-700">Work Opportunities</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" v-model="formData.help_needed" value="Education Access" class="form-checkbox">
+                            <span class="ml-2 text-gray-700">Education Access</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" v-model="formData.help_needed" value="Mentorship" class="form-checkbox">
+                            <span class="ml-2 text-gray-700">Mentorship</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" v-model="formData.help_needed" value="Mental Wellness" class="form-checkbox">
+                            <span class="ml-2 text-gray-700">Mental Wellness</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" v-model="formData.help_needed" value="Life Coaching" class="form-checkbox">
+                            <span class="ml-2 text-gray-700">Life Coaching</span>
+                        </label>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" v-model="formData.help_needed" value="Other" class="form-checkbox">
+                            <span class="ml-2 text-gray-700">Other</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-span-full">
+                    <label for="goalsAndChallenges" class="block text-gray-700 text-sm font-bold mb-2">
+                        Tell us about your goals/challenges (Optional):
+                    </label>
+                    <textarea id="goalsAndChallenges" v-model="formData.goals_and_challenges" rows="4"
+                              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                </div>
+
+                <!-- Section 5: Consent & Referral -->
+                <div class="col-span-full">
+                    <h3 class="text-xl font-medium text-blue-600 mb-4 border-b pb-2 mt-6">5. Consent & Referral</h3>
+                </div>
+                <div class="col-span-full">
+                    <label for="howHear" class="block text-gray-700 text-sm font-bold mb-2">How did you hear about Rise Batho?: <span class="text-red-500">*</span></label>
+                    <select id="howHear" v-model="formData.how_heard" required
+                            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Select Option</option>
+                        <option value="WhatsApp">WhatsApp</option>
+                        <option value="Facebook">Facebook</option>
+                        <option value="Friend">Friend</option>
+                        <option value="Community Leader">Community Leader</option>
+                        <option value="Poster">Poster</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="col-span-full flex items-center">
+                    <input type="checkbox" id="acceptPOPIA" v-model="formData.accept_popia_policy" required class="form-checkbox">
+                    <label for="acceptPOPIA" class="ml-2 text-gray-700">I accept the <a href="YOUR_POPIA_POLICY_URL_HERE" target="_blank" class="text-blue-500 hover:underline">POPIA policy</a> <span class="text-red-500">*</span></label>
+                </div>
+                <div class="col-span-full">
+                    <label for="completionDate" class="block text-gray-700 text-sm font-bold mb-2">Date of completing this form: <span class="text-red-500">*</span></label>
+                    <input type="date" id="completionDate" v-model="formData.form_completion_date" required
+                           class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+
+                <!-- Submission Button -->
+                <div class="col-span-full text-center mt-8">
+                    <button type="submit" :disabled="loading"
+                            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg focus:outline-none focus:shadow-outline transition duration-300 ease-in-out hover:scale-105 text-lg">
+                        {{ loading ? 'Submitting...' : 'Submit Your Profile' }}
+                    </button>
+                </div>
+            </form>
+
+            <!-- Message Box for Success/Error -->
+            <div v-if="message" :class="['mt-8 p-4 rounded-lg text-center', messageType === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700']">
+                <p class="font-semibold">{{ message }}</p>
+            </div>
+        </main>
+
+        <!-- Contact Section -->
+        <section class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg mb-10 text-center">
+            <h2 class="text-3xl font-semibold mb-6 text-blue-700">Get in Touch</h2>
+            <div class="flex flex-col md:flex-row justify-center items-center space-y-4 md:space-y-0 md:space-x-8 text-lg">
+                <p>
+                    <strong class="text-blue-600">WhatsApp:</strong>
+                    <a href="https://wa.me/27728270431" target="_blank" class="text-gray-700 hover:text-green-500 ml-2">
+                        <i class="fab fa-whatsapp"></i> +27 72 827 0431
+                    </a>
+                </p>
+                <p>
+                    <strong class="text-blue-600">Email:</strong>
+                    <a href="mailto:risebathofoundation@gmail.com" class="text-gray-700 hover:text-blue-500 ml-2">
+                        risebathofoundation@gmail.com
+                    </a>
+                </p>
+                <!-- Social Media Links-->
+                <p class="text-gray-700">
+                    <strong class="text-blue-600">Follow Us:</strong>
+                    <a href="#" target="_blank" class="text-gray-700 hover:text-blue-500 ml-2"><i class="fab fa-facebook"></i></a>
+                </p>
+            </div>
+             <!-- Font Awesome for social media icons -->
+            <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+        </section>
+
+        <!-- Footer Section -->
+        <footer class="text-center mt-8 p-4 text-gray-600">
+            <p>&copy; 2024 Rise Batho Foundation. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Ensure the DOM is fully loaded before initializing the Vue app and Supabase client
+        window.addEventListener('DOMContentLoaded', function() {
+            // Supabase Configuration - REPLACED WITH YOUR ACTUAL PROJECT URL
+            const SUPABASE_URL = 'https://isphtemmbvapetitaysv.supabase.co';
+            const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlzcGh0ZW1tYnZhcGV0aXRheXN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA5MjYwMzYsImV4cCI6MjA2NjUwMjAzNn0.p6_Zor2ycKEmsRMzRbwMnZWQIBUqX7BxlMWwIHkEWfY'; 
+
+            // Check if Supabase client is available globally
+            if (typeof window.supabase === 'undefined') {
+                console.error("Supabase client library not loaded. Check the CDN script tag in the <head>.");
+                // Optionally display a user-friendly message or disable form
+                document.getElementById('app').innerHTML = '<p class="text-red-600 text-center font-bold">Error: Application could not load. Please try again later. Ensure your internet connection is stable.</p>';
+                return; // Stop execution if Supabase is not available
+            }
+
+            // Create Supabase client instance using the globally available Supabase object
+            const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+            const app = Vue.createApp({
+                data() {
+                    return {
+                        formData: {
+                            first_name: '',
+                            middle_names: '',
+                            last_name: '',
+                            date_of_birth: '',
+                            gender: '',
+                            race: '',
+                            has_disability: null,
+                            phone_number: '',
+                            email: '',
+                            street_address: '',
+                            suburb: '',
+                            city: '',
+                            province: '',
+                            postal_code: '', // Kept as string for pattern validation input
+                            education_level: '',
+                            in_school: null,
+                            employed: null,
+                            looking_for_work: null,
+                            qualifications_certificates: '',
+                            skills: '',
+                            help_needed: [],
+                            goals_and_challenges: '',
+                            how_heard: '',
+                            accept_popia_policy: false,
+                            form_completion_date: new Date().toISOString().split('T')[0],
+                        },
+                        loading: false,
+                        message: '',
+                        messageType: '',
+                    };
+                },
+                methods: {
+                    async submitForm() {
+                        this.loading = true;
+                        this.message = '';
+                        this.messageType = '';
+
+                        // Client-side validation before submitting
+                        if (this.formData.help_needed.length === 0) {
+                            this.message = 'Please select at least one type of help you need.';
+                            this.messageType = 'error';
+                            this.loading = false;
+                            return;
+                        }
+                        if (!this.formData.accept_popia_policy) {
+                            this.message = 'You must accept the POPIA policy to submit the form.';
+                            this.messageType = 'error';
+                            this.loading = false;
+                            return;
+                        }
+
+                        // Prepare data for Supabase insertion
+                        // Ensure postal_code is converted to an integer if the DB column is int4
+                        const dataToInsert = {
+                            first_name: this.formData.first_name,
+                            middle_names: this.formData.middle_names,
+                            last_name: this.formData.last_name,
+                            date_of_birth: this.formData.date_of_birth,
+                            gender: this.formData.gender,
+                            race: this.formData.race,
+                            has_disability: this.formData.has_disability,
+                            phone_number: this.formData.phone_number,
+                            email: this.formData.email,
+                            street_address: this.formData.street_address,
+                            suburb: this.formData.suburb,
+                            city: this.formData.city,
+                            province: this.formData.province,
+                            postal_code: parseInt(this.formData.postal_code, 10), // Convert to integer for DB
+                            education_level: this.formData.education_level,
+                            in_school: this.formData.in_school,
+                            employed: this.formData.employed,
+                            looking_for_work: this.formData.looking_for_work,
+                            qualifications_certificates: this.formData.qualifications_certificates,
+                            skills: this.formData.skills,
+                            help_needed: this.formData.help_needed.join(', '), // Convert array to comma-separated string for DB
+                            goals_and_challenges: this.formData.goals_and_challenges,
+                            how_heard: this.formData.how_heard,
+                            accept_popia_policy: this.formData.accept_popia_policy,
+                            form_completion_date: this.formData.form_completion_date,
+                        };
+
+                        try {
+                            const { data, error } = await supabase
+                                .from('youth_profiles')
+                                .insert([dataToInsert]);
+
+                            if (error) {
+                                throw error;
+                            }
+
+                            this.message = 'Your profile has been submitted successfully! Thank you.';
+                            this.messageType = 'success';
+                            this.resetForm(); // Clear the form after successful submission
+                            console.log('Submission successful:', data);
+                        } catch (error) {
+                            this.message = `Error submitting profile: ${error.message}`;
+                            this.messageType = 'error';
+                            console.error('Submission error:', error);
+                        } finally {
+                            this.loading = false;
+                        }
+                    },
+                    resetForm() {
+                        this.formData = {
+                            first_name: '',
+                            middle_names: '',
+                            last_name: '',
+                            date_of_birth: '',
+                            gender: '',
+                            race: '',
+                            has_disability: null,
+                            phone_number: '',
+                            email: '',
+                            street_address: '',
+                            suburb: '',
+                            city: '',
+                            province: '',
+                            postal_code: '',
+                            education_level: '',
+                            in_school: null,
+                            employed: null,
+                            looking_for_work: null,
+                            qualifications_certificates: '',
+                            skills: '',
+                            help_needed: [],
+                            goals_and_challenges: '',
+                            how_heard: '',
+                            accept_popia_policy: false,
+                            form_completion_date: new Date().toISOString().split('T')[0],
+                        };
+                    },
+                },
+            });
+
+            app.mount('#app');
+        }); // End of DOMContentLoaded listener
+    </script>
+</body>
+</html>
